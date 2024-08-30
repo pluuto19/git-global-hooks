@@ -1,1 +1,11 @@
-#!/usr/bin/env python
+#!/bin/bash
+
+COMMIT_HASH=$(git rev-parse HEAD)
+COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+AUTHOR=$(git log -1 --pretty=format:'%an')
+TIMESTAMP=$(date +%s)
+
+# Send data to the local web server
+curl -X POST http://localhost:5000/git-commit \
+     -H "Content-Type: application/json" \
+     -d "{\"commit_hash\": \"$COMMIT_HASH\", \"commit_message\": \"$COMMIT_MESSAGE\", \"author\": \"$AUTHOR\", \"timestamp\": \"$TIMESTAMP\"}"
