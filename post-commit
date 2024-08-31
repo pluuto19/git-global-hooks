@@ -7,7 +7,7 @@ AUTHOR=$(git log -1 --pretty=format:'%an')
 TIMESTAMP=$(date +%s)
 
 # send data to the local running web server
-curl -X POST http://localhost:5000/git-commit \
+curl -X POST http://127.0.0.1:5000/git-commit \
      -H "Content-Type: application/json" \
      -d "{\"commit_hash\": \"$COMMIT_HASH\", \"commit_message\": \"$COMMIT_MESSAGE\", \"author\": \"$AUTHOR\", \"timestamp\": \"$TIMESTAMP\"}"
 
